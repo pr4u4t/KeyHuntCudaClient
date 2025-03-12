@@ -175,7 +175,13 @@ static void sort(long LENGTH, uint8_t* arr, int64_t n)
 
 static void write_file(const uint8_t* DATA, int64_t N, int64_t L, const char* filename)
 {
-	FILE* fd = fopen(filename, "wb");
+	//FILE* fd = fopen(filename, "wb");
+	FILE* fd = nullptr;
+	if (fopen_s(&fd, filename, "wb") != 0) {
+		printf("Error: not able to open output file: %s\n", filename);
+		exit(1);
+	}
+
 	if (fd == NULL) {
 		printf("Error: not able to open output file: %s\n", filename);
 		exit(1);
@@ -191,7 +197,13 @@ static void sort_file(long LENGTH, const char* in_filename, const char* out_file
 		exit(1);
 	}
 
-	FILE* fd = fopen(in_filename, "rb");
+	//FILE* fd = fopen(in_filename, "rb");
+	FILE* fd = nullptr;
+	if (fopen_s(&fd, in_filename, "rb") != 0) {
+		printf("Error: not able to open input file: %s\n", in_filename);
+		exit(1);
+	}
+
 	if (fd == NULL) {
 		printf("Error: not able to open input file: %s\n", in_filename);
 		exit(1);
