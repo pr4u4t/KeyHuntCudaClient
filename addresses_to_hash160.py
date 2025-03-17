@@ -15,9 +15,9 @@ def addresses_to_hash160(filein, fileout):
                 hash160 = codecs.encode(hash160, 'hex').decode()[2:]
                 outf.write(bytes.fromhex(hash160))
                 count += 1
-            except:
+            except Exception as e:
                 skip += 1
-                print("skipped address:", address)
+                print("skipped address:", address, e)
 
         print('processed :', count, 'addresses', '\nskipped   :', skip, 'addresses', )
 
